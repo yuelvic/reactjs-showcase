@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import styled from 'styled-components';
 import { Grid, Button, LinearProgress, createMuiTheme, MuiThemeProvider } from '@material-ui/core'
-import { indigo, pink, red, green } from '@material-ui/core/colors'
+import { indigo, pink, red } from '@material-ui/core/colors'
+import { Favorite } from '@material-ui/icons'
 
 const MIN = 0;
 const MAX = 100;
@@ -56,7 +57,7 @@ export default class App extends Component {
 
   handleColor = i => {
     if (this.state.time > 0) return "primary";
-    else return i == 2 ? "primary" : "secondary";
+    else return i === 2 ? "primary" : "secondary";
   }
 
   render() {
@@ -64,7 +65,7 @@ export default class App extends Component {
       <MuiThemeProvider theme={theme}>
         <Frame container direction="column">
           <Progress variant="determinate" value={this.normalise(this.state.time)} color="secondary"/>
-          <Label>What is the primary language of the Philippines?</Label>
+          <Question>What is the primary language of the Philippines?</Question>
           <Choices container direction="column" justify="space-between">
             <MaterialButton 
               onClick={() => this.handleChoice(0)} 
@@ -91,6 +92,9 @@ export default class App extends Component {
               Ilocano
             </MaterialButton>
           </Choices>
+          <Author>Made with <Favorite color="error" fontSize="small"/> by 
+            <Link href="https://yuelvic.github.io/" target="_blank" rel="noopener noreferrer"> Emmanuel Victor Garcia</Link>
+          </Author>
         </Frame>
       </MuiThemeProvider>
     );
@@ -115,13 +119,28 @@ const Progress = styled(LinearProgress)`
   width: 100%;
 `
 
-const Label = styled.label`
-  margin-top: 50px;
+const Question = styled.label`
+  margin-top: 70px;
   margin-left: 20px;
   margin-right: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
   text-align: center;
   font-size: 24px;
+`
+
+const Author = styled.label`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin: 20px;
+  font-size: 14px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+`
+
+const Link = styled.a`
+  text-decoration: none;
 `
 
 const Choices = styled(Grid)`
